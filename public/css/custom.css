@@ -1,0 +1,156 @@
+/* ----------------------------------------------------------------
+	Custom CSS
+
+	Add all your Custom Styled CSS here for New Styles or
+	Overwriting Default Theme Styles for Better Handling Updates
+-----------------------------------------------------------------*/
+
+.body-dark{
+	background-color: rgba(0,0,0,1)
+}
+
+*{
+	font-family: 'Raleway', sans-serif ;
+}
+
+::selection {
+    background: #D338EB;
+}
+
+.number-font{
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400
+}
+
+h1, h2, h3, h4, h5, h6, label{
+	font-family: 'Raleway', sans-serif ;
+	font-weight: 300;
+	color: rgba(255,255,255,1)
+}
+
+.input-field > label{
+	font-weight: 300
+}
+
+input.white-input{
+	color: rgba(255,255,255,1)
+}
+
+input.valid:not([type]), input.valid:not([type]):focus, input.valid[type="text"]:not(.browser-default), input.valid[type="text"]:not(.browser-default):focus, input.valid[type="password"]:not(.browser-default), input.valid[type="password"]:not(.browser-default):focus, input.valid[type="email"]:not(.browser-default), input.valid[type="email"]:not(.browser-default):focus, input.valid[type="url"]:not(.browser-default), input.valid[type="url"]:not(.browser-default):focus, input.valid[type="time"]:not(.browser-default), input.valid[type="time"]:not(.browser-default):focus, input.valid[type="date"]:not(.browser-default), input.valid[type="date"]:not(.browser-default):focus, input.valid[type="datetime"]:not(.browser-default), input.valid[type="datetime"]:not(.browser-default):focus, input.valid[type="datetime-local"]:not(.browser-default), input.valid[type="datetime-local"]:not(.browser-default):focus, input.valid[type="tel"]:not(.browser-default), input.valid[type="tel"]:not(.browser-default):focus, input.valid[type="number"]:not(.browser-default), input.valid[type="number"]:not(.browser-default):focus, input.valid[type="search"]:not(.browser-default), input.valid[type="search"]:not(.browser-default):focus, textarea.materialize-textarea.valid, textarea.materialize-textarea.valid:focus, .select-wrapper.valid > input.select-dropdown{
+	border-bottom: 1px solid #D338EB;
+	box-shadow: 0 1px 0 0 #D338EB;
+}
+
+input:not([type]):focus.valid ~ label,
+input[type=text]:not(.browser-default):focus.valid ~ label,
+input[type=password]:not(.browser-default):focus.valid ~ label,
+input[type=email]:not(.browser-default):focus.valid ~ label,
+input[type=url]:not(.browser-default):focus.valid ~ label,
+input[type=time]:not(.browser-default):focus.valid ~ label,
+input[type=date]:not(.browser-default):focus.valid ~ label,
+input[type=datetime]:not(.browser-default):focus.valid ~ label,
+input[type=datetime-local]:not(.browser-default):focus.valid ~ label,
+input[type=tel]:not(.browser-default):focus.valid ~ label,
+input[type=number]:not(.browser-default):focus.valid ~ label,
+input[type=search]:not(.browser-default):focus.valid ~ label,
+textarea.materialize-textarea:focus.valid ~ label {
+  color: #D338EB;
+}
+
+.cine-btn{
+	font-weight: 300;
+	background: #D338EB
+}
+
+.cine-btn:hover{
+	background-color: rgba(211,56,235,.75) !important
+}
+
+.glass-bg{
+	background: rgba( 255, 255, 255, 0.25 );
+	box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ) !important;
+	backdrop-filter: blur( 4px ) !important;
+	-webkit-backdrop-filter: blur( 4px ) !important;
+	border-radius: 10px !important;
+	border: 1px solid rgba( 0, 0, 0, 0.18 ) !important;
+}
+
+.pricing--norbu .pricing--item{
+	margin: 1em;
+    color: #fff;
+    cursor: default;
+	font-family: 'Raleway', sans-serif ;
+    background: rgba(0,0,0,0.28);
+}
+
+.pricing--norbu .pricing--item:hover{
+	background:rgba(255,255,255,1);
+	color: #000 !important
+}
+
+.pricing--norbu .pricing--item:hover .pricing--title{
+	color: rgba(0,0,0,1) !important
+}
+
+.pricing--norbu .pricing--item:hover .pricing--title::after{
+	background: rgba(0,255,85,1.00)
+}
+
+
+.pricing--norbu .pricing--feature::before {
+    content: "\e99f";
+    font-family: "font-icons";
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 0.75em 0.188em 0;
+    color: #00FF55 !important;
+    font-size: 5px;
+}
+
+.pricing--norbu .pricing--item > .pricing--action.cineplus-plan-btn{
+	background: rgba(0,255,85,1.00);
+	color: rgba(0,0,0,1);
+	border-radius: 50px;
+	cursor: pointer
+}
+
+.pricing--norbu .pricing--item:hover > .pricing--action.cineplus-plan-btn{
+	background: rgba(0,0,0,1);
+	color: rgba(0,255,85,1.00);
+	border-radius: 50px
+}
+
+
+.pricing--norbu .pricing--period{
+	padding: 0;
+}
+
+
+.pricing--norbu .pricing--price {
+    font-size: 3.5em;
+    padding: 0 0px 0px;
+    font-weight: 400;
+    position: relative;
+    z-index: 100;
+}
+
+.pricing--norbu .pricing--price{
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400
+}
+
+.dark .tab-nav.tab-nav2.cine-tab-nav li.ui-state-active a {
+    background-color: #D338EB;
+	border-radius: 50px
+}
+
+.radio-wrap{
+	display: flex;
+	align-items: center;
+}
+
+.radio-wrap > img{
+	width: 100px;
+}
+
+
