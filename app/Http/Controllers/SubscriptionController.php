@@ -11,7 +11,6 @@ class SubscriptionController extends Controller
     public function buySubscriptionPackages(Request $request)
     {
         $is_active = 1;
-
         $values = array(
             'customer_id' => Auth::user()->id, 'plan_id' => $request->plan_id,
             'is_active' => $is_active,
