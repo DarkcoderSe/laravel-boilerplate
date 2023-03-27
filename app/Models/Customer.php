@@ -9,13 +9,14 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Cashier\Billable;
 
 class Customer extends Authenticatable implements JWTSubject
 {
     use CrudTrait;
     use HasRoles;
     use \Backpack\CRUD\app\Models\Traits\CrudTrait;
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, Billable;
     /**
      * The attributes that are mass assignable.
      *

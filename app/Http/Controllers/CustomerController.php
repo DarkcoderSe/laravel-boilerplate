@@ -36,7 +36,6 @@ class CustomerController extends Controller
             try {           
                 Auth::login($user, true);
             } catch (\Exception $e) {
-                dd($e);
                 return redirect('login')
                 ->with('error', 'Invalid Credentials');
             }    

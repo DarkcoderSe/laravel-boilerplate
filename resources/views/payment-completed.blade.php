@@ -53,7 +53,7 @@
                 @if($status)
                     <h2 class="pricing-section--title center">Thank you</h2>
 
-                    <h4 class="pricing-section--title center">You may login into the app now</h4>
+                    <!-- <h4 class="pricing-section--title center">You may login into the app now</h4> -->
                 @endif
                 </div>
             </div>

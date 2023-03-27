@@ -103,16 +103,23 @@
                                                                 <label for="credit-card-number">Credit Card
                                                                     Number</label>
                                                                 <input type="text" id="credit-card-number"
-                                                                    name="credit-card-number" value=""
+                                                                    name="credit_card_number" value=""
                                                                     class="form-control required"
                                                                     placeholder="Please enter your credit card number" />
                                                             </div>
 
-                                                            <div class="col-6 bottommargin-sm">
-                                                                <label for="valid-date">Valid Date</label>
-                                                                <input type="text" name="valid-date" id="valid-date"
+                                                            <div class="col-3 bottommargin-sm">
+                                                                <label for="valid-date">Expiry Month</label>
+                                                                <input type="text" name="expiry_month" id="valid-date"
                                                                     class="form-control required" value=""
-                                                                    placeholder="YY/MM">
+                                                                    placeholder="MM">
+                                                            </div>
+
+                                                            <div class="col-3 bottommargin-sm">
+                                                                <label for="valid-date">Expiry Year</label>
+                                                                <input type="text" name="expiry_year" id="valid-date"
+                                                                    class="form-control required" value=""
+                                                                    placeholder="YY">
                                                             </div>
 
                                                             <div class="col-6 bottommargin-sm">
@@ -121,7 +128,8 @@
                                                                     class="form-control" placeholder="CVV Number" />
                                                             </div>
 
-                                                            <input type="hidden" name="plan_id" value= "{{ app('request')->input('subscription_package') }}" />
+                                                            <input type="hidden" name="plan_id" value= "{{ app('request')->input('plan') }}" />
+                                                            <input type="hidden" name="price_id" value= "{{ app('request')->input('price') }}" />
 
                                                             <div class="col-12">
                                                                 <button type="submit" name="template-contactform-submit"

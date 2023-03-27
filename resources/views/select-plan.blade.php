@@ -55,8 +55,8 @@
                             <h3 class="pricing--title">{{ $plan->name }}</h3>
                             <span class="pricing--description">{{ $plan->description }}</span>
                             <div class="pricing--price"><span class="pricing--currency">USD</span> {{ $plan->price }}</div>
-
-                            <a href="/checkout?plan={{ $plan->id }}"
+                            
+                            <a href="/checkout?plan={{ $plan->id }}&price={{ $plan->price_id }}"
                                 class="pricing--action cineplus-plan-btn">Choose plan</a>
                         </div>
                         @endforeach
