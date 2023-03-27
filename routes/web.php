@@ -34,32 +34,33 @@ Route::get('/login', function (Request $request) {
 
 Route::post('/login', '\App\Http\Controllers\CustomerController@login');
 
-Route::get('/logout', function (Request $request) {
-    auth('customer')->logout();
-    return redirect('/login');
-})->middleware('auth:web');
-
 Route::get('/forgot-password', function () {
     return view('forgot-password');
 })->name('customer.forgot-password');
 
-Route::post('customer', '\App\Http\Controllers\CustomerController@create');
+Route::post('/forgot-password', '\App\Http\Controllers\CustomerController@forgotPasswordWeb');
 
-Route::get('/select-plan', '\App\Http\Controllers\SubscriptionController@getPlans')->middleware('auth:web');
+Route::post('customer', '\App\Http\Controllers\CustomerController@create');
 
 Route::get('/payment-completed', function () {
     return view('payment-completed');
 });
 
-Route::post('/checkout/pay', [
-    'uses' => 'App\Http\Controllers\SubscriptionController@buyPlan',
-])->middleware('auth:web');
-
-Route::get('/checkout', function (Request $request) {
-    if (!$request->has('plan')) {
-        return redirect('select-plan');
-    }
-    return view('checkout', [
-        'subscription_package' => $request->plan,
+Route::middleware('auth.customer')->group(function () {
+    Route::get('/checkout', function (Request $request) {
+        if (!$request->has('plan')) {
+            return redirect('select-plan');
+        }
+        return view('checkout', [
+            'subscription_package' => $request->plan,
+        ]);
+    });
+    Route::post('/checkout/pay', [
+        'uses' => 'App\Http\Controllers\SubscriptionController@buyPlan',
     ]);
-})->middleware('auth:web');
+    Route::get('/select-plan', '\App\Http\Controllers\SubscriptionController@getPlans');
+    Route::get('/logout', function (Request $request) {
+        auth('customer')->logout();
+        return redirect('/login');
+    });
+});

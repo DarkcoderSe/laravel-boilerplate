@@ -21,6 +21,7 @@ class CreateCustomersTable extends Migration
             $table->longText("auth_token")->nullable();
             $table->longText("remember_token")->nullable();
             $table->string('password');
+            $table->longText("token_forgot_password")->nullable();
             $table->timestamps();
         });
     }

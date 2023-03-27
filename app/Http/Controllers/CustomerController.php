@@ -16,10 +16,6 @@ use Illuminate\Support\Str;
 
 class CustomerController extends Controller
 {
-    protected $providers = [
-        'facebook', 'google', 'sign-in-with-apple',
-    ];
-
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -31,16 +27,12 @@ class CustomerController extends Controller
             return redirect('login')->withErrors(['Make sure to fill in all fields'])->withInput();
         }
 
-        $user = Customer::where('email', $request->email)->first();
-        if($user){
-            try {           
-                Auth::login($user, true);
-            } catch (\Exception $e) {
-                return redirect('login')
-                ->with('error', 'Invalid Credentials');
-            }    
-        }        
-        return  redirect('/select-plan');
+        if(Auth::guard('customer')->attempt(['email'=>$request->email, 
+        'password'=> $request->password])) {
+            return redirect('/select-plan');  
+        }  
+        return redirect('login')
+        ->with('error', 'Invalid Credentials');      
     }
 
     public function create(Request $request)
@@ -63,11 +55,9 @@ class CustomerController extends Controller
                 'email' => $request->email,
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
-                'password' => $request->password,
+                'password' => Hash::make($request->password),
             ]);
-            Auth::login($customer);
-
-            //Auth::guard('customer')->login($customer);
+            Auth::guard('customer')->login($customer);
         } catch (\Exception $e) {
             return redirect('register')->withErrors($e->getMessage());
         }
@@ -114,70 +104,26 @@ class CustomerController extends Controller
         return redirect()->route('login')
             ->withErrors(['msg' => $msg ?: 'Unable to login, try with another provider to login.']);
     }
-
-    protected function loginOrCreateAccount($providerUser, $driver)
-    {
-        // check for already has account
-        $user = Customer::where('email', $providerUser->getEmail())->first();
-
-        // if user already found
-        if ($user) {
-            // update the avatar and provider that might have changed
-            $user->update([
-                'provider' => $driver,
-                'provider_id' => $providerUser->id,
-                'access_token' => $providerUser->token,
-            ]);
-        } else {
-            // create a new user
-            $user = Customer::create([
-                'first_name' => $providerUser->getName(),
-                'email' => $providerUser->getEmail(),
-                'provider' => $driver,
-                'provider_id' => $providerUser->getId(),
-                'access_token' => $providerUser->token,
-                // user can use reset password to create a password
-                'password' => '',
-            ]);
-        }
-
-        // login the user
-        Auth::login($user, true);
-
-        return $this->sendSuccessResponse();
-    }
-
-    private function isProviderAllowed($driver)
-    {
-        return in_array($driver, $this->providers) && config()->has("services.{$driver}");
-    }
     
     public function forgotPasswordWeb(Request $request)
     {
-          //$request->validate([
-            //  'email' => 'required|email|exists:customers',
-          //]);
-          $request->validate([
-              'email' => 'required|email'
-          ]);
-          $customer=Customer::where('email',$request->email)->first();
-          if(!$customer){
-       
-            $message="This email address is not registered with us!";
-       
+        $request->validate([
+            'email' => 'required|email'
+        ]);
+        $customer=Customer::where('email',$request->email)->first();
+        if(!$customer){       
+            $message="This email address is not registered with us!";       
             return view('forgot-password', compact('message'));
-
         }
 
-          $token = Str::random(64);
-          $customer->token_forgot_password=$token;
-          $customer->save();
+        $token = Str::random(64);
+        $customer->token_forgot_password=$token;
+        $customer->save();
 
-          Mail::to($customer->email)->send(new ForgotPassword($token));
-          $message="The mail with link to reset your password has been sent!";
-      
-          return view('forgot-password', compact('message'));
-
+        Mail::to($customer->email)->send(new ForgotPassword($token));
+        $message="The mail with link to reset your password has been sent!";
+    
+        return view('forgot-password', compact('message'));
     }
 
     public function forgotPassword(Request $request)
